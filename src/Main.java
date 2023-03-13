@@ -19,17 +19,9 @@ public class Main {
             
             //On construit le graphe que l'utilisateur a demandé
             Graphe graphe = builder.build(fileName);
-            
-            //On vérifie s'il y a un circuit
-            String checkCircuit = (checker.checkCircuit(graphe))? "Il n'y a pas de circuits" : "Il y a un circuit";
-            System.out.println(checkCircuit); 
-            
-            }
-            sc.close();
+            checker.checkCircuit(graphe);
         }
-
-        
-
-    
+        sc.close();
     }
+}
 
