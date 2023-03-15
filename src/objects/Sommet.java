@@ -9,6 +9,8 @@ public class Sommet {
     private List<String> predecesseurs = new ArrayList<>();;
     private List<String> successeurs = new ArrayList<>();
     private int duree;
+    private int rang;
+
 
     public Sommet(int numero, int duree) {
         this.numero = numero;
@@ -40,12 +42,21 @@ public class Sommet {
         return duree;
     }
 
+    public int getRang() {
+        return rang;
+    }
+
+    public void setRang(int rang) {
+        this.rang = rang;
+    }
+
     @Override
     public String toString() {
-        return "Nom : " + getNumero()+
+        return "Nom : " + getNumero() +
                 " Durée : " + getDuree() +
                 " Prédécesseurs : " + getPredecesseurs() +
-                " Successeurs : " + getSuccesseurs();
+                " Successeurs : " + getSuccesseurs() + 
+                " Rang : " + getRang() + "\n";
     }
 
 }

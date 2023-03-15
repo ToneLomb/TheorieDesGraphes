@@ -28,4 +28,32 @@ public class Graphe {
         return matrice;
     }
 
+    public HashMap<Integer,Sommet> getSommetsCopy() {
+
+        HashMap<Integer,Sommet> copy = new HashMap<>();
+        for(Sommet sommet : sommets.values()){
+
+            int numeroSommet = sommet.getNumero();
+            int duree = sommet.getDuree();
+            Sommet copySommet =  new Sommet(numeroSommet, duree);
+
+            List<String> predecesseurCopy = new ArrayList<>(); 
+            List<String> successeurCopy = new ArrayList<>(); 
+
+            for(String predecesseur : sommet.getPredecesseurs()){
+                predecesseurCopy.add(predecesseur);
+            }
+            for(String successeur : sommet.getSuccesseurs()){
+                successeurCopy.add(successeur);
+            }
+
+            copySommet.setPredecesseurs(predecesseurCopy);
+            copySommet.setSuccesseurs(successeurCopy);
+            copySommet.setRang(sommet.getRang());
+
+            copy.put(numeroSommet,copySommet);
+            
+        }
+        return copy;
+    }
 }

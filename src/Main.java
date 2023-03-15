@@ -19,7 +19,17 @@ public class Main {
             
             //On construit le graphe que l'utilisateur a demandé
             Graphe graphe = builder.build(fileName);
+
+            //System.out.println(graphe.getSommets());
             checker.checkCircuit(graphe);
+            //System.out.println(graphe.getSommets());
+
+
+            
+            builder.initRang(graphe);
+            
+           
+
         }
         sc.close();
     }

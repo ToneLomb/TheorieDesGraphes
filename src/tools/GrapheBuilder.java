@@ -3,6 +3,7 @@ package tools;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import objects.Graphe;
@@ -127,5 +128,57 @@ public class GrapheBuilder {
             System.out.println();
         }
         return matrice;
+    }
+
+    public void initRang(Graphe graphe){
+
+        //On récupère la copie de la liste des sommets du graphe
+        HashMap<Integer,Sommet> listeSommets = graphe.getSommetsCopy();
+
+        //On instancie la liste des entrées qui va nous servir pour l'algorithme de rangs
+        ArrayList<Sommet> entrees = new ArrayList<>();
+        int rang = 0;
+
+        //Tant que tout le graphe n'a pas été traité
+        while(!listeSommets.isEmpty()){
+
+            //On parcourt les sommets restants
+            for(Sommet sommet : listeSommets.values()){
+
+                //Si un sommet n'a pas de prédécesseurs, c'est une entrée
+                if(sommet.getPredecesseurs().isEmpty()){
+                    entrees.add(sommet);
+                }
+            }
+
+            //Tant qu'on a pas traité les entrées de l'itération actuelle
+            while(!entrees.isEmpty()){
+
+                Sommet entree = entrees.get(0);
+                int numeroSommet = entree.getNumero();
+
+                //On récupère ses sucesseurs
+                List<String> successeurs = entree.getSuccesseurs();
+
+                //Pour chaque sucesseur, on supprime l'entrée de ses prédecesseurs
+                for(String successeur : successeurs){
+
+                    Sommet enfantSommet = listeSommets.get(Integer.parseInt(successeur));
+                    enfantSommet.getPredecesseurs().remove(String.valueOf(numeroSommet));
+
+                }
+
+                //Le sommet étant traité, on lui attribue son rang, et on le supprime de la liste des sommets à traiter
+                graphe.getSommets().get(numeroSommet).setRang(rang);
+                listeSommets.remove(numeroSommet);
+
+                //On oublie pas d'enlever l'entrée pour la boucle
+                entrees.remove(0);
+
+            }
+            //On passe à l'itération suivante
+            rang++;
+        }
+
     }
 }

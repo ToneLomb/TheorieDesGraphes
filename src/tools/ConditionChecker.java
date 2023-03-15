@@ -9,9 +9,10 @@ import objects.Sommet;
 public class ConditionChecker {
 
     public boolean checkCircuit(Graphe graphe){
+
         
-        //On récupère les sommets du graphe
-        HashMap<Integer,Sommet> listeSommets = graphe.getSommets();
+        //On récupère une copie des sommets du graphe
+        HashMap<Integer,Sommet> listeSommets = graphe.getSommetsCopy();
         
         //On initialise un booléen qui permettra de savoir si on peut supprimer un sommet ou non
         boolean sommetSupprime = true;
@@ -19,6 +20,7 @@ public class ConditionChecker {
         //Tant qu'il y a des sommets à supprimer
         while(sommetSupprime && !listeSommets.isEmpty()){
             
+
             sommetSupprime = false;
             
             //On parcourt la liste de sommets
@@ -46,6 +48,7 @@ public class ConditionChecker {
                         Sommet suivant = listeSommets.get(Integer.parseInt(successeur));
     
                         //On enleve des prédécesseurs le numéro du sommet
+
                         //System.out.println("Prédécesseurs de " + successeur + " Avant : " +  suivant.getPredecesseurs());
                         suivant.getPredecesseurs().remove(String.valueOf(numeroSommet));
                         //System.out.println("Prédécesseurs de " + successeur + " Apres : " +  suivant.getPredecesseurs());
@@ -62,5 +65,4 @@ public class ConditionChecker {
         System.out.println(checkCircuit);
         return listeSommets.isEmpty();
     }
-    
 }
