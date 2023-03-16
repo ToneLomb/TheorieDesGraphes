@@ -40,5 +40,23 @@ public class StringUtilities {
         
     }
 
+    public String getMaxDates(List<String> datesPlusTot){
+
+        int max = 0;
+        String numero = "0";
+        for(String dates : datesPlusTot){
+
+            String[] duree = dates.split(" ");
+            int intDuree = Integer.parseInt(duree[0]);
+            if(intDuree > max){
+                max = intDuree;
+                numero = duree[1];
+            }
+        }
+
+        return max + " " + numero;
+
+    }
+
 
 }

@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import objects.Graphe;
 import tools.ConditionChecker;
+import tools.DatesBuilder;
 import tools.GrapheBuilder;
 
 
@@ -29,6 +30,14 @@ public class Main {
 
                 //Affichage des rangs
                 System.out.println(graphe.getSommets());
+
+                DatesBuilder db = new DatesBuilder();
+                db.initDatesPlusTot(graphe);
+
+                System.out.println("Calcul des dates au plus tôt : ");
+                System.out.println(graphe.getSommets());
+
+
 
             }else{
                 System.out.println("Il y au circuit, on ne peut pas faire d'ordonnancement. Veuillez choisir un nouveau graphe");

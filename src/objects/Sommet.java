@@ -11,6 +11,14 @@ public class Sommet {
     private int duree;
     private int rang;
 
+    //Pour calcul des dates si ordonnancement
+    private List<String> datesPredecesseurs = new ArrayList<>();
+    private String datePlusTot;
+
+    private List<String> datesSuccesseurs = new ArrayList<>();
+    private String datePlusTard;
+
+    //private int marge;
 
     public Sommet(int numero, int duree) {
         this.numero = numero;
@@ -50,13 +58,49 @@ public class Sommet {
         this.rang = rang;
     }
 
+    public List<String> getDatesPredecesseurs() {
+        return datesPredecesseurs;
+    }
+
+
+    public void setDatesPredecesseurs(List<String> datesPredecesseurs) {
+        this.datesPredecesseurs = datesPredecesseurs;
+    }
+
+    public String getDatePlusTot() {
+        return datePlusTot;
+    }
+
+    public void setDatePlusTot(String datePlusTot) {
+        this.datePlusTot = datePlusTot;
+    }
+
+    public List<String> getDatesSuccesseurs() {
+        return datesSuccesseurs;
+    }
+
+    public void setDatesSuccesseurs(List<String> datesSuccesseurs) {
+        this.datesSuccesseurs = datesSuccesseurs;
+    }
+
+    public String getDatePlusTard() {
+        return datePlusTard;
+    }
+
+    public void setDatePlusTard(String datePlusTard) {
+        this.datePlusTard = datePlusTard;
+    }
+
     @Override
     public String toString() {
         return "Nom : " + getNumero() +
                 " Durée : " + getDuree() +
                 " Prédécesseurs : " + getPredecesseurs() +
                 " Successeurs : " + getSuccesseurs() + 
-                " Rang : " + getRang() + "\n";
+                " Rang : " + getRang() + 
+                " Date par prédécesseur : " + getDatesPredecesseurs() +
+                " Date au plus tôt : " + getDatePlusTot() + 
+                "\n";
     }
 
 }
