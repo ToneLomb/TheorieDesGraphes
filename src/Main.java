@@ -20,16 +20,19 @@ public class Main {
             //On construit le graphe que l'utilisateur a demandé
             Graphe graphe = builder.build(fileName);
 
-            //System.out.println(graphe.getSommets());
-            checker.checkCircuit(graphe);
-            //System.out.println(graphe.getSommets());
 
+            if(checker.checkCircuit(graphe)){
+                System.out.println("Il n'y a pas de circuits, on calcule les rangs et les dates");
 
-            
-            builder.initRang(graphe);
-            
-           
+                //Calcul des rangs
+                builder.initRang(graphe);
 
+                //Affichage des rangs
+                System.out.println(graphe.getSommets());
+
+            }else{
+                System.out.println("Il y au circuit, on ne peut pas faire d'ordonnancement. Veuillez choisir un nouveau graphe");
+            }
         }
         sc.close();
     }

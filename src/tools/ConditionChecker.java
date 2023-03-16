@@ -61,8 +61,6 @@ public class ConditionChecker {
                 }
             }
         }
-        String checkCircuit = (listeSommets.isEmpty())? "Il n'y a pas de circuits" : "Il y a un circuit";
-        System.out.println(checkCircuit);
         return listeSommets.isEmpty();
     }
 }

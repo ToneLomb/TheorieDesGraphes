@@ -179,6 +179,6 @@ public class GrapheBuilder {
             //On passe à l'itération suivante
             rang++;
         }
-
+        
     }
 }
