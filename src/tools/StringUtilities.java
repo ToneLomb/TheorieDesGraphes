@@ -58,5 +58,26 @@ public class StringUtilities {
 
     }
 
+    public String getMinDates(List<String> datesPlusTard){
+
+        String[] init = datesPlusTard.get(0).split(" ");
+        int min = Integer.parseInt(init[0]);
+
+        String numero = (init.length < 2 )? "": init[1];
+
+        for(String dates : datesPlusTard){
+
+            String[] duree = dates.split(" ");
+            int intDuree = Integer.parseInt(duree[0]);
+            if(intDuree < min){
+                min = intDuree;
+                numero = duree[1];
+            }
+        }
+
+        return min + " " + numero;
+
+    }
+
 
 }

@@ -97,10 +97,12 @@ public class Sommet {
                 " Durée : " + getDuree() +
                 " Prédécesseurs : " + getPredecesseurs() +
                 " Successeurs : " + getSuccesseurs() + 
-                " Rang : " + getRang() + 
+                " Rang : " + getRang() + "\n" +
                 " Date par prédécesseur : " + getDatesPredecesseurs() +
-                " Date au plus tôt : " + getDatePlusTot() + 
-                "\n";
+                " Date au plus tôt : " + getDatePlusTot() + "\n" +
+                " Date par successeur : " + getDatesSuccesseurs() +
+                " Date au plus tard : " + getDatePlusTard() + 
+                "\n\n";
     }
 
 }

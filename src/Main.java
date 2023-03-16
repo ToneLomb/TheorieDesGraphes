@@ -29,14 +29,14 @@ public class Main {
                 builder.initRang(graphe);
 
                 //Affichage des rangs
-                System.out.println(graphe.getSommets());
+                //System.out.println(graphe.getSommets());
 
                 DatesBuilder db = new DatesBuilder();
                 db.initDatesPlusTot(graphe);
+                db.initDatesPlusTard(graphe);
 
-                System.out.println("Calcul des dates au plus tôt : ");
+                //System.out.println("Calcul des dates au plus tôt : ");
                 System.out.println(graphe.getSommets());
-
 
 
             }else{
