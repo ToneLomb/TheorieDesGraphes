@@ -19,7 +19,7 @@ public class StringUtilities {
                 List<String> liste = new ArrayList<>();
 
                 String filePath = new File("").getAbsolutePath();
-                filePath += "\\TheorieDesGraphes\\" + fileName + ".txt";
+                filePath += "\\" + fileName + ".txt";
                 System.out.print(filePath);
 
                 BufferedReader br = new BufferedReader(new FileReader(filePath));
