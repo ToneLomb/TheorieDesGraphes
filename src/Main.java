@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
 import objects.Graphe;
+import objects.Sommet;
 import tools.ConditionChecker;
 import tools.DatesBuilder;
 import tools.GrapheBuilder;
+import tools.StringUtilities;
 
 
 public class Main {
@@ -12,7 +14,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String fileName = "";
         ConditionChecker checker = new ConditionChecker();
-
+        StringUtilities su = StringUtilities.getInstance();
+        
         //Tant que l'utilisateur n'entre pas exit
         while(!(fileName = sc.nextLine()).equals("exit")){
 
@@ -23,7 +26,7 @@ public class Main {
 
 
             if(checker.checkCircuit(graphe)){
-                System.out.println("Il n'y a pas de circuits, on calcule les rangs et les dates");
+                System.out.println("\nIl n'y a pas de circuits, on calcule les rangs et les dates\n");
 
                 //Calcul des rangs
                 builder.initRang(graphe);
@@ -34,9 +37,19 @@ public class Main {
                 DatesBuilder db = new DatesBuilder();
                 db.initDatesPlusTot(graphe);
                 db.initDatesPlusTard(graphe);
+                db.initMarge(graphe);
+
+                System.out.println("\nCalcul des marges et récapitulatif des sommets :\n");
+                for(Sommet s : graphe.getSommets().values()){
+                    System.out.println(s);
+                }
+                
+
+                builder.initCheminCritique(graphe);
+                System.out.println("\nAffichage des chemins critiques :\n");
+                su.afficherCheminCritique(graphe);
 
                 //System.out.println("Calcul des dates au plus tôt : ");
-                System.out.println(graphe.getSommets());
 
 
             }else{

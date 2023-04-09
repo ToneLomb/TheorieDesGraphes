@@ -22,7 +22,7 @@ public class GrapheBuilder {
         graphe.getSommets().put(0, alpha);
 
         //On lit les lignes du fichier texte
-        StringUtilities su = new StringUtilities();
+        StringUtilities su = StringUtilities.getInstance();
         List<String> fileLines = su.readFile(fileName);
         
         //Pour chaque ligne (autrement dit sommet) faire :
@@ -73,6 +73,7 @@ public class GrapheBuilder {
             }
         }
         
+        System.out.println("\n\nAffichage du graphe sous forme de jeu de triplets");
         //On parcourt de nouveau chaque sommet
         for (Sommet s : graphe.getSommets().values()){
 
@@ -84,7 +85,7 @@ public class GrapheBuilder {
                 omega.getPredecesseurs().add(String.valueOf(s.getNumero()));
             }
             //Affichage du graphe
-            System.out.println(s);
+            System.out.println(s.sansDates());
         }
         // On crée la matrice de valeur
         graphe.setMatrice(buildMatrice(graphe)); 
@@ -110,6 +111,7 @@ public class GrapheBuilder {
             matrice.add(list);
         }
         // Affichage
+        System.out.println("\nAffichage de la matrice : \n");
         for (int k = 0; k < matrice.size(); k++) {
             if (k < 10)
                 System.out.print("   " + k);
@@ -123,10 +125,16 @@ public class GrapheBuilder {
             else
                 System.out.print(i + " ");
             for (int j = 0; j < matrice.size(); j++) {
-                System.out.print(matrice.get(i).get(j) + "   ");
+                if(matrice.get(i).get(j).length() < 2){
+                    System.out.print(matrice.get(i).get(j) + "   ");
+                }
+                else{
+                    System.out.print(matrice.get(i).get(j) + "  ");
+                }
             }
             System.out.println();
         }
+        System.out.println("\n");
         return matrice;
     }
 
@@ -139,6 +147,7 @@ public class GrapheBuilder {
         ArrayList<Sommet> entrees = new ArrayList<>();
         int rang = 0;
 
+        System.out.println("Calcul des rangs : \n");
         //Tant que tout le graphe n'a pas été traité
         while(!listeSommets.isEmpty()){
 
@@ -151,6 +160,11 @@ public class GrapheBuilder {
                 }
             }
 
+            List<Integer> entreesToInteger = new ArrayList<>();
+            for(Sommet s : entrees){
+                entreesToInteger.add(s.getNumero());
+            }
+            System.out.println("Les entrées sont : " + entreesToInteger + ". On les supprime");
             //Tant qu'on a pas traité les entrées de l'itération actuelle
             while(!entrees.isEmpty()){
 
@@ -177,8 +191,62 @@ public class GrapheBuilder {
 
             }
             //On passe à l'itération suivante
+            System.out.println("Leur rang est : " + rang + "\n");
             rang++;
         }
         
+    }
+
+    public void initCheminCritique(Graphe graphe){
+
+        List<Sommet> sommets = new ArrayList<>();
+        sommets.add(graphe.getSommets().get(0));
+
+        //On va chercher les chemins critiques à partir du sommet 0
+        trouverCheminCritique(graphe, sommets);
+       
+    }
+
+    public void trouverCheminCritique(Graphe graphe, List<Sommet> instanceDuSommetPrecedant){
+        
+        //Marge sous la forme "duree succeseur critique" On prend donc la String marge du dernier sommet precedant sous forme de tableau
+        String[] margeSplit = instanceDuSommetPrecedant.get(instanceDuSommetPrecedant.size()-1).getMarge().split(" ");
+        List<Sommet> instanceDuSommetActuelle = new ArrayList<>();
+        List<Sommet> sommetATraiter = new ArrayList<>();
+
+        //On récupère les sommets précedants
+        for(Sommet sommet : instanceDuSommetPrecedant){
+            instanceDuSommetActuelle.add(sommet);
+        }
+
+        //Si le sommet suivant est final, on ajoute la liste actuelle aux chemins critiques car on est à la fin
+        if(margeSplit[1].equals("/")){
+
+            graphe.getCheminCritique().add(instanceDuSommetActuelle);
+            return;
+        }
+
+        //Sinon, on ajoute tous les successeurs critiques aux sommets à traiter
+        for(int i = 1; i < margeSplit.length ; i++){
+            sommetATraiter.add(graphe.getSommets().get(Integer.parseInt(margeSplit[i])));
+        }
+
+        //Tant qu'il reste des sommets à traiter
+        while(!sommetATraiter.isEmpty()){
+
+            //On ajoute le prochain sommet à la liste, puis avec la récursivité il va continuer le chemin critique à partir de cette nouvelle liste
+            instanceDuSommetActuelle.add(sommetATraiter.get(0));
+            trouverCheminCritique(graphe, instanceDuSommetActuelle);
+
+            //Une fois arrivé au chemin final, il enleve le chemin qui vient d'être traité et passe au suivant
+            sommetATraiter.remove(0);
+
+            //On revient avant la bifurcation
+            instanceDuSommetActuelle.remove(instanceDuSommetActuelle.size()-1);
+
+        }
+
+        return;
+     
     }
 }

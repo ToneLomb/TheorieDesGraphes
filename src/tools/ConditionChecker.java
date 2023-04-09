@@ -17,6 +17,7 @@ public class ConditionChecker {
         //On initialise un booléen qui permettra de savoir si on peut supprimer un sommet ou non
         boolean sommetSupprime = true;
         
+        System.out.println("\nDetection de circuits à l'aide de la méthode de suppression des entrées\n");
         //Tant qu'il y a des sommets à supprimer
         while(sommetSupprime && !listeSommets.isEmpty()){
             
@@ -36,12 +37,11 @@ public class ConditionChecker {
     
                     //On récupère le numéro du sommet à supprimer
                     int numeroSommet = sommet.getNumero();
-                    //System.out.println("On doit supprimer le sommet : " + numeroSommet);
-
+                    System.out.println("On doit supprimer l'entrée : " + numeroSommet);
 
                     //On prend la liste de ses successeurs
                     List<String> successeurs = sommet.getSuccesseurs();
-                    //System.out.println("Sommets dont on doit supprimer le prédecesseur " + numeroSommet + " : " + successeurs);
+                    System.out.println("Sommet(s) dont on doit supprimer comme prédecesseur " + numeroSommet + " : " + successeurs +"\n");
                     
                     //Pour chaque successeur
                     for(String successeur : successeurs){
@@ -61,6 +61,8 @@ public class ConditionChecker {
                 }
             }
         }
+        String result = listeSommets.isEmpty()? "Il n'y a plus d'entrées" : "On ne peut plus rien supprimer car il y a un circuit";
+        System.out.println(result);
         return listeSommets.isEmpty();
     }
 }

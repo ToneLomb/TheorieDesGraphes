@@ -8,6 +8,8 @@ public class Graphe {
     //Permet de lier un sommet à un numéro
     private HashMap<Integer,Sommet> sommets = new HashMap<>();
     private ArrayList<List<String>> matrice;
+    private ArrayList<List<Sommet>> cheminCritique = new ArrayList<>();
+
 
     public Graphe (){
     }
@@ -26,6 +28,14 @@ public class Graphe {
 
     public ArrayList<List<String>> getMatrice() {
         return matrice;
+    }
+
+    public ArrayList<List<Sommet>> getCheminCritique() {
+        return cheminCritique;
+    }
+
+    public void setCheminCritique(ArrayList<List<Sommet>> cheminCritique) {
+        this.cheminCritique = cheminCritique;
     }
 
     public HashMap<Integer,Sommet> getSommetsCopy() {
@@ -56,4 +66,6 @@ public class Graphe {
         }
         return copy;
     }
+
+    
 }

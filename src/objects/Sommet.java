@@ -13,12 +13,14 @@ public class Sommet {
 
     //Pour calcul des dates si ordonnancement
     private List<String> datesPredecesseurs = new ArrayList<>();
-    private String datePlusTot;
+    private List<String> datePlusTot;
 
     private List<String> datesSuccesseurs = new ArrayList<>();
-    private String datePlusTard;
+    private List<String> datePlusTard;
 
-    //private int marge;
+    private String marge;
+
+
 
     public Sommet(int numero, int duree) {
         this.numero = numero;
@@ -67,11 +69,11 @@ public class Sommet {
         this.datesPredecesseurs = datesPredecesseurs;
     }
 
-    public String getDatePlusTot() {
+    public List<String> getDatePlusTot() {
         return datePlusTot;
     }
 
-    public void setDatePlusTot(String datePlusTot) {
+    public void setDatePlusTot(List<String> datePlusTot) {
         this.datePlusTot = datePlusTot;
     }
 
@@ -83,17 +85,27 @@ public class Sommet {
         this.datesSuccesseurs = datesSuccesseurs;
     }
 
-    public String getDatePlusTard() {
+    public List<String> getDatePlusTard() {
         return datePlusTard;
     }
 
-    public void setDatePlusTard(String datePlusTard) {
+    public void setDatePlusTard(List<String> datePlusTard) {
         this.datePlusTard = datePlusTard;
     }
 
+    public String getMarge() {
+        return marge;
+    }
+
+
+    public void setMarge(String marge) {
+        this.marge = marge;
+    }
+
+
     @Override
     public String toString() {
-        return "Nom : " + getNumero() +
+        return "\nNuméro : " + getNumero() +
                 " Durée : " + getDuree() +
                 " Prédécesseurs : " + getPredecesseurs() +
                 " Successeurs : " + getSuccesseurs() + 
@@ -101,8 +113,17 @@ public class Sommet {
                 " Date par prédécesseur : " + getDatesPredecesseurs() +
                 " Date au plus tôt : " + getDatePlusTot() + "\n" +
                 " Date par successeur : " + getDatesSuccesseurs() +
-                " Date au plus tard : " + getDatePlusTard() + 
-                "\n\n";
+                " Date au plus tard : " + getDatePlusTard() +
+                " Marge : " + getMarge() + 
+       
+                "\n";
+    }
+
+    public String sansDates(){
+        return "\nNuméro : " + getNumero() +
+                " Durée : " + getDuree() +
+                " Prédécesseurs : " + getPredecesseurs() +
+                " Successeurs : " + getSuccesseurs();
     }
 
 }
